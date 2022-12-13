@@ -4,7 +4,6 @@ const mysql = require('mysql2')
 require('dotenv').config()
 const app = express()
 
-
 app.use(cors())
 
 const connection = mysql.createConnection(process.env.DATABASE_URL)
@@ -13,8 +12,6 @@ app.all('/', (req, res) => {
     console.log("Just got a request!")
     res.send('Yo!')
 })
-
-
 
 app.get('/locationarrest', (req,res) => {
     connection.query(
@@ -25,8 +22,6 @@ app.get('/locationarrest', (req,res) => {
         }
     )
 })
-
-
 
 app.listen(process.env.PORT || 3002)
 

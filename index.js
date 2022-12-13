@@ -15,6 +15,7 @@ app.all('/', (req, res) => {
 })
 
 
+
 app.get('/locationarrest', (req,res) => {
     connection.query(
         'SELECT * FROM LocationArrestTB',

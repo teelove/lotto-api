@@ -45,7 +45,7 @@ app.get("/locationarrest", (req, res) => {
       console.log(results);
       res.send(results);
     }
-  );  */
+  );
 });*/
 
 

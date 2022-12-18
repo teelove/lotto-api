@@ -24,21 +24,22 @@ app.get("/locationarrest", (req, res) => {
 });
 
 
-app.post("/insertlocationarrest", function (req, res, next) {  
-    connection.execute(
-      "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
-      [req.body.LocationArrest],
-      function (err, results, fields) {
-        if (err) {
-          res.json({ status: "error", message: err });
-          return;
-        }
-        res.json({ status: "ok" });
-        // If you execute same statement again, it will be picked from a LRU cache
-        // which will save query preparation time and give better performance
-      }
-    );
-  // execute will internally call prepare and query
+
+
+app.post("/insertlocationarrest", function(req, res) {
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log('Connected to the database.');
+
+    const sql = 'INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)';
+    const values = ['john@example.com'];
+
+    connection.execute(sql, values, function (err, result) {
+      if (err) throw err;
+      console.log('Inserted new row with ID:', result.insertId);
+      res.send('Inserted new user with ID: ' + result.insertId);
+    });
+  });
 });
 
 

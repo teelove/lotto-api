@@ -24,6 +24,7 @@ app.get("/locationarrest", (req, res) => {
 });
 
 
+
 app.post("/insertlocationarrest", function (req, res, next) {  
     connection.execute(
       "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",

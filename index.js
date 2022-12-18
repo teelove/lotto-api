@@ -23,7 +23,7 @@ app.get("/locationarrest", (req, res) => {
   );
 });
 
-app.post("/insertlocationarrest", (req, res) => {
+app.get("/insertlocationarrest", (req, res) => {
   /*const data = req.body;
   // Insert the data into the database
   connection.query(

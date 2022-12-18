@@ -24,11 +24,10 @@ app.get("/locationarrest", (req, res) => {
 });
 
 app.get("/insertlocationarrest", (req, res) => {
-  /*const data = req.body;
+  const data = req.body;
   // Insert the data into the database
   connection.query(
-    "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
-    [data.LocationArrest],
+    "INSERT INTO LocationArrestTB (LocationArrest) VALUES ('ตลาดโคกมะตูม ตำบลในเมือง อำเภอเมืองพิษณูโลก จังหวัดพิษณุโลก')",
     (error, results) => {
       if (error) {
         console.error(error);
@@ -37,16 +36,17 @@ app.get("/insertlocationarrest", (req, res) => {
       }
       res.json({ success: true });
     }
-  );*/
-  connection.query(
+  );
+  /*connection.query(
     "SELECT * FROM LocationArrestTB",
     function (err, results, fields) {
       console.log(results);
       res.send(results);
     }
-  );
-  
+  );  */
 });
+
+
 
 
 

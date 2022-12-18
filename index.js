@@ -29,13 +29,14 @@ app.post("/insertlocationarrest", (req, res) => {
   connection.query(
     "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
     [req.body.LocationArrest],
-    (error, results) => {
-      if (error) {
-        console.error(error);
-        res.status(500).json({ error: "An error occurred" });
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: "error", message: err });
         return;
       }
-      res.json({ success: true });
+      res.json({ status: "ok" });
+      // If you execute same statement again, it will be picked from a LRU cache
+      // which will save query preparation time and give better performance
     }
   );
   /*connection.query(

@@ -29,7 +29,7 @@ app.get("/locationarrest", (req, res) => {
 app.post("/insertlocationarrest", function (req, res) {
   connection.execute(
     "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
-    ['test 1111'],
+    [req.body.locationname],
     function (err, results, fields) {
       if (err) {
         res.json({ status: "error", message: err });

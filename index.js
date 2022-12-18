@@ -32,7 +32,7 @@ app.post("/insertlocationarrest", function(req, res) {
     console.log('Connected to the database.');
 
     const sql = 'INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)';
-    const values = [req.body.raw.locationname.values];
+    const values = [req.body.raw.locationname];
     
 
     connection.execute(sql, values, function (err, result) {

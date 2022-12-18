@@ -26,8 +26,8 @@ app.get("/locationarrest", (req, res) => {
 
 app.post("/insertlocationarrest", jsonParser, function (req, res, next) {  
     connection.execute(
-      "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
-      [req.body.LocationArrest],
+      "INSERT INTO LocationArrestTB (LocationArrest) VALUES ('หน้าร้านสะดวกซื้อใกล้กับแยกถนนบึงพระจันทร์ ถนนบรมไตรโลกนารถ ตำบลในเมือง อำเภอเมืองพิษณุโลก จังหวัดพิษณุโลก')",/*
+      [req.body.LocationArrest],*/
       function (err, results, fields) {
         if (err) {
           res.json({ status: "error", message: err });

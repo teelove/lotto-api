@@ -24,7 +24,7 @@ app.get("/locationarrest", (req, res) => {
 });
 
 app.post("/insertlocationarrest", (req, res) => {
-  const data = req.body;
+  /*const data = req.body;
   // Insert the data into the database
   connection.query(
     "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
@@ -37,7 +37,15 @@ app.post("/insertlocationarrest", (req, res) => {
       }
       res.json({ success: true });
     }
+  );*/
+  connection.query(
+    "SELECT * FROM LocationArrestTB",
+    function (err, results, fields) {
+      console.log(results);
+      res.send(results);
+    }
   );
+  
 });
 
 

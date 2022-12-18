@@ -24,10 +24,11 @@ app.get("/locationarrest", (req, res) => {
 });
 
 app.post("/insertlocationarrest", (req, res) => {
-  const data = req.body;
+  //const data = req.body;
   // Insert the data into the database
   connection.query(
-    "INSERT INTO LocationArrestTB (LocationArrest) VALUES ('ตลาดโคกมะตูม ตำบลในเมือง อำเภอเมืองพิษณูโลก จังหวัดพิษณุโลก')",
+    "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
+    [req.body.LocationArrest],
     (error, results) => {
       if (error) {
         console.error(error);

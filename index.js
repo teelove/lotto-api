@@ -1,8 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 const app = express();
+
+// create application/json parser
+var jsonParser = bodyParser.json();
 
 app.use(cors());
 
@@ -40,6 +44,25 @@ app.post("/insertlocationarrest", function (req, res) {
       // which will save query preparation time and give better performance
     }
   );
+});
+
+
+
+app.post("/register", jsonParser, function (req, res, next) {
+    connection.execute(
+      "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
+      [req.body.LocationArrest],
+      function (err, results, fields) {
+        if (err) {
+          res.json({ status: "error", message: err });
+          return;
+        }
+        res.json({ status: "ok" });
+        // If you execute same statement again, it will be picked from a LRU cache
+        // which will save query preparation time and give better performance
+      }
+    );
+  // execute will internally call prepare and query
 });
 
 

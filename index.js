@@ -27,27 +27,6 @@ app.get("/locationarrest", (req, res) => {
   );
 });
 
-
-
-
-app.post("/insertlocationarrest", function (req, res) {
-  connection.execute(
-    "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
-    ['test data 2'],
-    function (err, results, fields) {
-      if (err) {
-        res.json({ status: "error", message: err });
-        return;
-      }
-      res.json({ status: "ok" });
-      // If you execute same statement again, it will be picked from a LRU cache
-      // which will save query preparation time and give better performance
-    }
-  );
-});
-
-
-
 app.post("/register", jsonParser, function (req, res, next) {
     connection.execute(
       "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
@@ -63,6 +42,25 @@ app.post("/register", jsonParser, function (req, res, next) {
       }
     );
   // execute will internally call prepare and query
+});
+
+
+
+app.post("/insertlocationarrest", jsonParser, function (req, res, next) {
+  connection.execute(
+    "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
+    [req.body.LocationArrest],
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: "error", message: err });
+        return;
+      }
+      res.json({ status: "ok" });
+      // If you execute same statement again, it will be picked from a LRU cache
+      // which will save query preparation time and give better performance
+    }
+  );
+// execute will internally call prepare and query
 });
 
 

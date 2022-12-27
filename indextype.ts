@@ -13,7 +13,7 @@ const jsonParser = bodyParser.json();
 
 app.use(cors());
 
-const connection = mysql.createConnection(process.env.DATABASE_URL);
+const connection = mysql.createConnection(process.env.DATABASE_URL || "");
 
 app.all('/', (req: Request, res: Response) => {
   console.log('Just got a request!');

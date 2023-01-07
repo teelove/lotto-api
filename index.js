@@ -18,7 +18,7 @@ app.all("/", (req, res) => {
   res.send("Yo!");
 });
 
-app.get("/locationarrest", (req, res) => {
+app.get("/locationarrests", (req, res) => {
   connection.query(
     "SELECT * FROM LocationArrestTB",
     function (err, results, fields) {
@@ -26,6 +26,24 @@ app.get("/locationarrest", (req, res) => {
       res.send(results);
     }
   );
+});
+
+
+app.post("/locationarrests", jsonParser, function (req, res, next) {
+  connection.execute(
+    "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
+    [req.body.LocationArrest],
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: "error", message: err });
+        return;
+      }
+      res.json({ status: "ok" });
+      // If you execute same statement again, it will be picked from a LRU cache
+      // which will save query preparation time and give better performance
+    }
+  );
+// execute will internally call prepare and query
 });
 
 app.post("/register", jsonParser, function (req, res, next) {

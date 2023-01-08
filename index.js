@@ -28,6 +28,16 @@ app.get("/locationarrests", (req, res) => {
   );
 });
 
+app.get("/v1/locationarrests", (req, res) => {
+  connection.query(
+    "SELECT * FROM LocationArrestTB",
+    function (err, results, fields) {
+      console.log(results);
+      res.send(results);
+    }
+  );
+});
+
 app.post("/locationarrests", jsonParser, function (req, res, next) {
   connection.execute(
     "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",

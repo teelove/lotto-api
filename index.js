@@ -67,11 +67,7 @@ app.get("/v1/suspectors", (req, res) => {
 app.post("/v1/suspectors", jsonParser, function (req, res, next) {
   connection.execute(
     "INSERT INTO SuspectorsArrestTB (SuspectorGender,SuspectorName,SuspectorSurname,SuspectorAge,SuspectorAddress) VALUES (?,?,?,?,?)",
-    [req.body.SuspectorGender],
-    [req.body.SuspectorName],
-    [req.body.SuspectorSurname],
-    [req.body.SuspectorAge],
-    [req.body.SuspectorAddress],
+    [req.body.SuspectorGender,req.body.SuspectorName,req.body.SuspectorSurname,req.body.SuspectorAge,req.body.SuspectorAddress],
     function (err, results, fields) {
       if (err) {
         res.json({ status: "error", message: err });

@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const app = express();
 
-
 // create application/json parser
 var jsonParser = bodyParser.json();
 
@@ -52,7 +51,7 @@ app.post("/v1/locationarrests", jsonParser, function (req, res, next) {
       // which will save query preparation time and give better performance
     }
   );
-// execute will internally call prepare and query
+  // execute will internally call prepare and query
 });
 
 app.get("/v1/suspectors", (req, res) => {
@@ -65,24 +64,43 @@ app.get("/v1/suspectors", (req, res) => {
   );
 });
 
-app.post("/register", jsonParser, function (req, res, next) {
-    connection.execute(
-      "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
-      [req.body.LocationArrest],
-      function (err, results, fields) {
-        if (err) {
-          res.json({ status: "error", message: err });
-          return;
-        }
-        res.json({ status: "ok" });
-        // If you execute same statement again, it will be picked from a LRU cache
-        // which will save query preparation time and give better performance
+app.post("/v1/suspectors", jsonParser, function (req, res, next) {
+  connection.execute(
+    "INSERT INTO SuspectorsArrestTB (SuspectorGender,SuspectorName,SuspectorSurname,SuspectorAge,SuspectorAddress) VALUES (?,?,?,?,?)",
+    [req.body.SuspectorGender],
+    [req.body.SuspectorName],
+    [req.body.SuspectorSurname],
+    [req.body.SuspectorAge],
+    [req.body.SuspectorAddress],
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: "error", message: err });
+        return;
       }
-    );
+      res.json({ status: "ok" });
+      // If you execute same statement again, it will be picked from a LRU cache
+      // which will save query preparation time and give better performance
+    }
+  );
   // execute will internally call prepare and query
 });
 
-
+app.post("/register", jsonParser, function (req, res, next) {
+  connection.execute(
+    "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
+    [req.body.LocationArrest],
+    function (err, results, fields) {
+      if (err) {
+        res.json({ status: "error", message: err });
+        return;
+      }
+      res.json({ status: "ok" });
+      // If you execute same statement again, it will be picked from a LRU cache
+      // which will save query preparation time and give better performance
+    }
+  );
+  // execute will internally call prepare and query
+});
 
 app.post("/insertlocationarrest", jsonParser, function (req, res, next) {
   connection.execute(
@@ -98,12 +116,8 @@ app.post("/insertlocationarrest", jsonParser, function (req, res, next) {
       // which will save query preparation time and give better performance
     }
   );
-// execute will internally call prepare and query
+  // execute will internally call prepare and query
 });
-
-
-
-
 
 app.listen(process.env.PORT || 3002);
 

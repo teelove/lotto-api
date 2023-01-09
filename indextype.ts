@@ -30,6 +30,8 @@ app.get('/locationarrest', (req: Request, res: Response) => {
   );
 });
 
+
+
 app.post('/register', jsonParser, (req: Request, res: Response, next: any) => {
   connection.execute(
     'INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)',

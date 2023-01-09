@@ -38,7 +38,7 @@ app.get("/v1/locationarrests", (req, res) => {
   );
 });
 
-app.post("/locationarrests", jsonParser, function (req, res, next) {
+app.post("/v1/locationarrests", jsonParser, function (req, res, next) {
   connection.execute(
     "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
     [req.body.LocationArrest],

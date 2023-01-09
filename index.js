@@ -55,6 +55,16 @@ app.post("/v1/locationarrests", jsonParser, function (req, res, next) {
 // execute will internally call prepare and query
 });
 
+app.get("/v1/suspectors", (req, res) => {
+  connection.query(
+    "SELECT * FROM SuspectorsArrestTB",
+    function (err, results, fields) {
+      console.log(results);
+      res.send(results);
+    }
+  );
+});
+
 app.post("/register", jsonParser, function (req, res, next) {
     connection.execute(
       "INSERT INTO LocationArrestTB (LocationArrest) VALUES (?)",
